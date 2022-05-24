@@ -1,22 +1,6 @@
 # Gophersat, a SAT and pseudo-boolean solver written in Go
 
-![Status](https://img.shields.io/badge/status-stable-green.svg?style=plastic)
-[![GitHub tag](https://img.shields.io/github/tag/crillab/gophersat.svg)](https://github.com/crillab/gophersat)
-![license](https://img.shields.io/github/license/crillab/gophersat.svg)
-[![GoReport](https://goreportcard.com/badge/github.com/crillab/gophersat)](https://goreportcard.com/report/github.com/crillab/gophersat)
-[![GoDoc](https://godoc.org/github.com/crillab/gophersat?status.svg)](https://godoc.org/github.com/crillab/gophersat)
-[![Build Status](https://travis-ci.org/crillab/gophersat.svg?branch=master)](https://travis-ci.org/crillab/gophersat)
-
-![gophersat logo](https://raw.githubusercontent.com/crillab/gophersat/master/gophersat.png)
-
-This is Gophersat, a SAT and pseudo-boolean solver written purely in Go. 
-Gophersat was developed by the [CRIL (Centre de Recherche en Informatique
-de Lens)](http://www.cril.fr) at the Artois University & CNRS. It is
-released under the MIT license. Gophersat is rather efficient, i.e on
-typical SAT benchmarks it runs about 2 to 5 times slower than top-level
-solvers (namely, [glucose](http://www.labri.fr/perso/lsimon/glucose/) or
-[minisat](http://minisat.se/)) from which it is strongly inspired.
-It can also solve MAXSAT problems, and pseudo-boolean decision and optimization problems.
+This is a fork of [crillab/gophersat](https://github.com/crillab/gophersat) with the goal to make it work with TinyGo. Currently, this is not possible with the upstream version at least due to [one issue](https://github.com/tinygo-org/tinygo/issues/1037) of TinyGo.
 
 
 ## Version 1.3
