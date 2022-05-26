@@ -3,7 +3,7 @@ package maxsat
 import (
 	"fmt"
 
-	"github.com/crillab/gophersat/solver"
+	"github.com/j-blue-arz/tiny-gophersat/solver"
 )
 
 // A Model associates variable names with a binding.

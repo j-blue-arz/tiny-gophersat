@@ -8,10 +8,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/crillab/gophersat/bf"
-	"github.com/crillab/gophersat/explain"
-	"github.com/crillab/gophersat/maxsat"
-	"github.com/crillab/gophersat/solver"
+	"github.com/j-blue-arz/tiny-gophersat/bf"
+	"github.com/j-blue-arz/tiny-gophersat/explain"
+	"github.com/j-blue-arz/tiny-gophersat/maxsat"
+	"github.com/j-blue-arz/tiny-gophersat/solver"
 )
 
 const helpString = "This is gophersat version 1.3, a SAT and Pseudo-Boolean solver by Fabien Delorme.\n"
