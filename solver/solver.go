@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-	"time"
 )
 
 const (
@@ -432,34 +431,6 @@ func (s *Solver) Solve() Status {
 	//s.lbdStats.clear()
 	s.localNbRestarts = 0
 	var end chan struct{}
-	if s.Verbose {
-		end = make(chan struct{})
-		defer close(end)
-		go func() { // Function displaying stats during resolution
-			fmt.Printf("c ======================================================================================\n")
-			fmt.Printf("c | Restarts |  Conflicts  |  Learned  |  Deleted  | Del%% | Reduce |   Units learned   |\n")
-			fmt.Printf("c ======================================================================================\n")
-			ticker := time.NewTicker(3 * time.Second)
-			defer ticker.Stop()
-			for { // There might be concurrent access in a few places but this is okay since we are very conservative and don't modify state.
-				select {
-				case <-ticker.C:
-				case <-end:
-					return
-				}
-				if s.status == Indet {
-					iter := s.Stats.NbRestarts + 1
-					nbConfl := s.Stats.NbConflicts
-					nbReduce := s.wl.idxReduce - 1
-					nbLearned := len(s.wl.learned)
-					nbDel := s.Stats.NbDeleted
-					pctDel := int(100 * float64(nbDel) / float64(s.Stats.NbLearned))
-					nbUnit := s.Stats.NbUnitLearned
-					fmt.Printf("c | %8d | %11d | %9d | %9d | %3d%% | %6d | %8d/%8d |\n", iter, nbConfl, nbLearned, nbDel, pctDel, nbReduce, nbUnit, s.nbVars)
-				}
-			}
-		}()
-	}
 	for s.status == Indet {
 		s.search()
 		if s.status == Indet {
@@ -550,34 +521,6 @@ func (s *Solver) Enumerate(models chan []bool, stop chan struct{}) int {
 // CountModels returns the total number of models for the given problem.
 func (s *Solver) CountModels() int {
 	var end chan struct{}
-	if s.Verbose {
-		end = make(chan struct{})
-		defer close(end)
-		go func() { // Function displaying stats during resolution
-			fmt.Printf("c ======================================================================================\n")
-			fmt.Printf("c | Restarts |  Conflicts  |  Learned  |  Deleted  | Del%% | Reduce |   Units learned   |\n")
-			fmt.Printf("c ======================================================================================\n")
-			ticker := time.NewTicker(3 * time.Second)
-			defer ticker.Stop()
-			for { // There might be concurrent access in a few places but this is okay since we are very conservative and don't modify state.
-				select {
-				case <-ticker.C:
-				case <-end:
-					return
-				}
-				if s.status == Indet {
-					iter := s.Stats.NbRestarts + 1
-					nbConfl := s.Stats.NbConflicts
-					nbReduce := s.wl.idxReduce - 1
-					nbLearned := len(s.wl.learned)
-					nbDel := s.Stats.NbDeleted
-					pctDel := int(100 * float64(nbDel) / float64(s.Stats.NbLearned))
-					nbUnit := s.Stats.NbUnitLearned
-					fmt.Printf("c | %8d | %11d | %9d | %9d | %3d%% | %6d | %8d/%8d |\n", iter, nbConfl, nbLearned, nbDel, pctDel, nbReduce, nbUnit, s.nbVars)
-				}
-			}
-		}()
-	}
 	nb := 0
 	lit := s.chooseLit()
 	var lvl decLevel
